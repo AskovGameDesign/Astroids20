@@ -21,6 +21,7 @@ public class Bullet : MonoBehaviour
         
     }
 
+
     private void FixedUpdate()
     {
         rb2d.AddRelativeForce(Vector2.up * speed, ForceMode2D.Impulse);

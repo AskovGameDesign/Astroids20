@@ -11,13 +11,11 @@ public class PlayerMovement : MonoBehaviour
 
     private float forceInput;
     private float torqueInput;
-    private float left, top;
-
+    private Vector2 HorizontalAndVerticalBorder;
    
     void Start()
     {
-        left = Camera.main.ScreenToWorldPoint(Vector3.zero).x;
-        top = Camera.main.ScreenToWorldPoint(Vector3.zero).y;
+        HorizontalAndVerticalBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
     }
 
     void Update()
@@ -25,23 +23,22 @@ public class PlayerMovement : MonoBehaviour
         forceInput = Input.GetAxis("Vertical");
         torqueInput = Input.GetAxis("Horizontal");
 
-        if(rb2d.position.x < left )
+        if(rb2d.position.x > HorizontalAndVerticalBorder.x)
         {
-            rb2d.position = new Vector2(-left, rb2d.position.y);
+            rb2d.position = new Vector2(-HorizontalAndVerticalBorder.x, rb2d.position.y);
         }
-        else if(rb2d.position.x > -left)
+        else if(rb2d.position.x < -HorizontalAndVerticalBorder.x)
         {
-            rb2d.position = new Vector2(left, rb2d.position.y);
-        } 
-        else if(rb2d.position.y < top )
-        {
-            rb2d.position = new Vector2(rb2d.position.x, -top);
+            rb2d.position = new Vector2(HorizontalAndVerticalBorder.x, rb2d.position.y);
         }
-        else if(rb2d.position.y > -top)
+        else if(rb2d.position.y > HorizontalAndVerticalBorder.y)
         {
-            rb2d.position = new Vector2(rb2d.position.x, top);
+            rb2d.position = new Vector2(rb2d.position.x, -HorizontalAndVerticalBorder.y);
         }
-
+        else if(rb2d.position.y < -HorizontalAndVerticalBorder.y)
+        {
+            rb2d.position = new Vector2(rb2d.position.x, HorizontalAndVerticalBorder.y);
+        }
 
     }
 

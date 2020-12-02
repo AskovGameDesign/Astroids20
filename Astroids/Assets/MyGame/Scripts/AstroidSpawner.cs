@@ -8,12 +8,12 @@ public class AstroidSpawner : MonoBehaviour
     public GameObject astroidPrefab;
 
     public List<Transform> spawnPoints;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         Transform[] tmpList = GetComponentsInChildren<Transform>();
-        
+
         foreach (var item in tmpList)
         {
             if (item != this.transform)
